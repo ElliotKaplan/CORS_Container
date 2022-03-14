@@ -1,7 +1,7 @@
 # CORS_Container
 Docker container for hosting CORS attacks against vulnerable sites
 
-## Serving the exploit
+## Serving the Exploit
 
 This exploit is served using a Docker container from this directory run
 
@@ -14,6 +14,17 @@ to build the container. Then run
 for the exploit server to be available on localhost on port 8000. This
 will serve the malicious javascript and the appropriate
 Access-Control headers to exploit a logged in user.
+
+## Custom Response Headers
+
+This container separates the response header definition for `lighttpd` off into a separate file `/etc/lighttpd/response_headers.conf`. If you need to set different response headers than 
+
+    Access-Control-Allow-Origin: *
+    Access-Control-Allow-Credentials: true
+    
+you should mount a new `.conf` file to with the following flag
+
+    -v /path/to/response_headers.conf:/etc/lighttpd/response_headers.conf
 
 
 ## Firing the Exploit
